@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Musaf App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
       ),
@@ -35,7 +35,8 @@ class _SurahsindexscreenState extends State<Surahsindexscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
+      backgroundColor: Colors.grey,
+      body:  ListView.builder(
         itemCount: 114,
         itemBuilder: (context, index) {
           return ListTile(
@@ -51,6 +52,7 @@ class _SurahsindexscreenState extends State<Surahsindexscreen> {
                   " | " +
                   quran.getSurahName(index + 1),
               style: GoogleFonts.amiriQuran(),
+          
             ),
 
             subtitle: Text(quran.getSurahNameEnglish(index + 1)),
@@ -73,6 +75,8 @@ class _DetailSurahState extends State<DetailSurah> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            appBar: AppBar(title: Text(quran.getSurahName(widget.surahNum)),),
+      backgroundColor: Colors.grey,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(15.0),
@@ -93,9 +97,11 @@ class _DetailSurahState extends State<DetailSurah> {
                   quran.getVerseTranslation(
                     widget.surahNum,
                     index + 1,
-                    translation: quran.Translation.urdu),
+                    translation: quran.Translation.urdu,
+                  ),
                   textDirection: TextDirection.rtl,
-                 ),
+                  style: GoogleFonts.notoNastaliqUrdu(),
+                ),
               );
             },
           ),
@@ -104,3 +110,6 @@ class _DetailSurahState extends State<DetailSurah> {
     );
   }
 }
+
+
+
