@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quran/quran.dart' as quran;
@@ -19,7 +21,46 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
       ),
-      home: Surahsindexscreen(),
+      home: SplashScreen(),
+    );
+  }
+}
+
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Timer(
+      Duration(seconds: 3),
+      () {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Surahsindexscreen(),
+            ));
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text(
+          "مصحف",
+          style: GoogleFonts.amiriQuran(fontSize: 45, color: Colors.white),
+        ),
+      ),
+      backgroundColor: Colors.blue[900],
     );
   }
 }
@@ -35,8 +76,9 @@ class _SurahsindexscreenState extends State<Surahsindexscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
-      body:  ListView.builder(
+      appBar: AppBar(backgroundColor: Colors.black45,title: Text("Musaf App"),),
+      backgroundColor: Colors.lightBlueAccent,
+      body: ListView.builder(
         itemCount: 114,
         itemBuilder: (context, index) {
           return ListTile(
@@ -52,7 +94,6 @@ class _SurahsindexscreenState extends State<Surahsindexscreen> {
                   " | " +
                   quran.getSurahName(index + 1),
               style: GoogleFonts.amiriQuran(),
-          
             ),
 
             subtitle: Text(quran.getSurahNameEnglish(index + 1)),
@@ -75,8 +116,8 @@ class _DetailSurahState extends State<DetailSurah> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: AppBar(title: Text(quran.getSurahName(widget.surahNum)),),
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.lightBlueAccent,
+      appBar: AppBar(backgroundColor: Colors.black45 ,title: Text(quran.getSurahName(widget.surahNum),),),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(15.0),
@@ -110,6 +151,3 @@ class _DetailSurahState extends State<DetailSurah> {
     );
   }
 }
-
-
-
